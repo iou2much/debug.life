@@ -1,0 +1,59 @@
+title: 【译文】Docker：立刻停止使用AUFS！
+date: 2016-01-10 00:50:23
+toc: true
+category: 翻译
+---
+
+
+在大多数Ubuntu系统上，Docker的默认文件系统是AUFS.
+
+别用它，用Overlay吧，下来我告诉你为什么。
+
+首先，补充一下背景，我在POWER服务器上测试基础的LAMP环境的性能（LAMP代表Linux+Apache+MySQL/MariaDB+PHP）。为了能做更可靠和重复性的测试，我在Docker容器里构建了这个环境。（相关内容可以参考我[上一篇文章](http://sthbrx.github.io/blog/2015/10/12/a-tale-of-two-dockers/)）
+
+每次测试会下载Apache , MariaDB和PHP的源码并且编译。这个过程应该很快，我使用的POWER 8服务器有160个硬线程以及128GB内存，但是我发现构建的速度和一个BlueMix云上的2核Intel虚拟机一样。
+
+为什么？我第一件事就是在<code>top</code>下观察编译的过程。<code>top</code>的头部信息是以下这样：
+![图1](http://sthbrx.github.io/images/dja/aufs/top-bad.png)
+
+
+显示超过70%的CPU时间都花在内核上了？！那样非常奇怪，我们深入研究一下。
+
+接下来我想到的是使用<code>perf</code>来分析CPU的负载细节。<code>perf top</code>结果显示说大量的时间花费在自旋锁上：
+![图2](http://sthbrx.github.io/images/dja/aufs/perf-top-spinlock.png)
+
+<code>perf top -g</code>给出了更多信息：那些时间是花费在了系统调用上，<code>open()</code>和<code>stat()</code>是罪魁祸首，我们还能看到一系列的系统方法在自旋锁的调用链上。
+
+![图3](http://sthbrx.github.io/images/dja/aufs/perf-top-syscalls.png)
+
+为什么<code>open</code>和<code>stat</code>调用慢？我知道那些文件被挂载到AUFS上（如果你不确定，用<code>docker info</code>命令能看到）。那么，作为一个内核黑客，我决定继续寻根问底了，这个过程并不顺利。AUFS已经过时了，它是一组独立的补丁包，很多Linux发行版多年来都尝试去废弃它，实际上，红帽企业版并没有内置安装它（多亏了红帽，Docker似乎也有不再支持它的迹象）
+
+想要远离这个恶梦的一个方法是使用其他的补丁包，我查看了一下Docker支持的其他文件系统，找到这个[PPT](out-of-tree patchset)非常好。我的选项非常简单：AUFS，btrfs，device-mapper或者Overlay。Overlay是一个不二的选择，它不需要我在云端的虚拟机上安装device mapper，或者像btrfs那样需要重新格式化。
+
+它在Ubuntu上安装也很简单：
+
+- 把你需要的docker容器用export或save命令备份到文件
+
+- 在<code>/etc/default/docker</code>文件里的<code>DOCKER_OPTS</code>选项中添加<code> --storage-driver=overlay</code>，然后重启docker(使用<code>service docker restart</code>)
+
+- 是用import或load命令把之前导出的容器重新导入。
+
+- 验证一下一切是否正常，然后就可以把旧的储存路径删除掉了(<code>/var/lib/docker/aufs</code>)
+
+我转移了我的容器后，我开始了另一次编译。
+
+我首先注意到的是在Overlay上构建镜像缓慢了许多，但是一旦构建完成，开始编译之后，一切都有飞跃般的加速：
+
+![图4](http://sthbrx.github.io/images/dja/aufs/top-good.png)
+
+这些编译任务的过程从蜗牛那样慢变得像火箭那样快~完胜！
+
+结论：
+
+- 如果你用Docker来执行那些会产生大量的<code>open()</code>和<code>stat()</code>这种系统调用
+- 如果你想要你的机器能真正的工作，而不是在自旋锁里转不出来
+- 如果你想要用上更跟得上潮流的能被支持得更好的组件
+- 如果你想用上比btrfs或者device mapper这些更省事的文件系统
+
+。。。那么现在就抛弃AUFS，切换到Overlay吧。
+
