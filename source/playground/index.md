@@ -3,9 +3,13 @@ title: The Lab
 layout: normal
 ---
 
-#### 入口：
 
-[Linux终端](https://linux.debug.life/)
+####Linux终端
+
+```html
+<iframe frameborder="0" height="600px" width="100%" src='https://linux.debug.life'>
+</iframe>
+```
 
 我在云上起了一个Docker容器， 可以通过上边的终端连接上去，练习一些基本的Linux命令。
 
@@ -27,6 +31,8 @@ IP 是 <code> 192.168.42.29</code>
 
 也别担心会玩坏，只是个容器来的，即使是 <code>rm -rf / </code>也没事，哈哈，说是这么说，尽量还是别搞破坏哈~(发现不可用的同学可以联系我)
 
-<iframe frameborder="0" height="800px" width="100%" src='https://linux.debug.life'>
-
-</iframe>
+<div id="test" ng-controller="playgroundCtrl">
+  {{ time }}
+  <p ng-bind="test_data"></p>
+  <button ng-click="greet()">Greet</button>
+</div>
