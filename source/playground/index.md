@@ -1,5 +1,6 @@
+---
 title: The Lab
-date: 2016-01-13 02:06:09
+layout: normal
 ---
 
 #### 入口：
@@ -25,3 +26,7 @@ IP 是 <code> 192.168.42.29</code>
 这样，就可以进到容器里头操作了。装的依赖包不多，但是基本的Linux指令都可以玩起来了~ 
 
 也别担心会玩坏，只是个容器来的，即使是 <code>rm -rf / </code>也没事，哈哈，说是这么说，尽量还是别搞破坏哈~(发现不可用的同学可以联系我)
+
+<iframe frameborder="0" height="800px" width="100%" src='https://linux.debug.life'>
+
+</iframe>
