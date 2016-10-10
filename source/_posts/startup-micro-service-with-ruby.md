@@ -2,7 +2,7 @@
 title: 【译文】使用Ruby on Rails和Docker开始微服务之旅
 date: 2016-02-13 18:22:33
 toc: true
-category: 翻译
+category: Translation
 description: 本文主要是介绍微服务与Docker环境，还有像Rails这样的框架怎么运行在上边。另外，我们还会研究微服务的基础服务，像Docker、Giant Swarm，还有如何在云平台上运行这些服务。
 ---
 

@@ -5,7 +5,7 @@ tags:
  - Docker
 description: 本文介绍如何安装配置一个安装了Nginx的Docker容器，为本站提供服务
 toc: true
-category: 工具
+category: Tools
 ---
 
 ## 背景

@@ -1,7 +1,7 @@
 title: 【译文】使用Java构建微服务
 date: 2016-01-23 00:50:23
 toc: true
-category: 翻译
+category: Translation
 description: 本文讲述了如何在容器中用Java构建微服务
 ---
 

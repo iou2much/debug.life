@@ -6,7 +6,7 @@ tags:
  - Mac OS X
 description: 本文将介绍如何使用Hexo搭建静态博客
 toc: true
-category: 工具
+category: Tools
 ---
 	
 

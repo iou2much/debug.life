@@ -8,13 +8,13 @@ type: categories
 - 翻译
 - Bigdata
     - Machine Learning
-    - Scala
-    - Spark
+    - ### Scala
+    - ### Spark
     - Storm
     - Hadoop
     - Hive
     - HBase
-    - Python ( numpy / pandas / ….)
+    - ### Python ( numpy / pandas / ….)
     - R
     - ElasticSearch
     - Kafka

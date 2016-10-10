@@ -1,7 +1,7 @@
 title: 【译文】如何使用Docker创建开箱即用的MapR集群
 date: 2016-02-12 00:50:23
 toc: true
-category: 翻译
+category: Translation
 description: 为了保持快速创新的步伐，MapR团队已经在大量使用Docker。我们根据不同需要构建并维护了不同的运行着MapR的Docker镜像，而不是用物理机或者虚拟机来运行大量的测试集群，这样把数以小时计的部署测试集群时间减少到了秒级！.....
 ---
 

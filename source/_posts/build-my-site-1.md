@@ -2,12 +2,12 @@ title: 【debug.life构建手记】 ( 一 ) 基础设施搭建
 date: 2016-01-16 01:23:24
 tags: 
  - Openresty
- - 阿里云
+ - Aliyun
  - https
  - Nginx
 description: 本文记录了搭建本站基础设施的过程，包括购置云主机，域名，SSL证书，搭建配置Openresty服务等..........................请阅读全文
 toc: true
-category: 工具
+category: Tools
 ---
 
 本文是本站搭建记录系列的第一篇，会尽量详细地介绍如何从零开始搭建出这个网站。

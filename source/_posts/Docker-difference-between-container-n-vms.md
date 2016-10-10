@@ -1,7 +1,7 @@
 title: 【译文】Docker:容器与虚拟机的差异 
 date: 2016-01-10 00:50:23
 toc: true
-category: 翻译
+category: Translation
 description: 本文将探讨Docker容器和全虚拟化之间的区别.....
 ---
 

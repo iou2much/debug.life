@@ -4,7 +4,7 @@ tag:
   - Docker
 toc: true
 description: 本文将介绍如何把Java应用进行Docker化
-category: 翻译
+category: Translation
 ---
 
 ### 用Docker重新定义Java虚拟化
