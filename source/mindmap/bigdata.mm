@@ -1,6 +1,6 @@
 {
 "meta":{
-    "name":"大数据工程师必备技能",
+    "name":"数据工程师/科学家必备技能",
     "author":"iou2much@sina.com",
     "version":"0.1"
 },
@@ -34,7 +34,9 @@
     ]},
     {"id":"maths","topic":"数学","direction":"right","expanded":false,"children":[
         {"id":"calculus","topic":"微积分"},
-        {"id":"linear-algebra","topic":"线性代数"},
+        {"id":"linear-algebra","topic":"线性代数","children":[
+            {"id":"matrix","topic":"矩阵"},
+        ]},
         {"id":"propability","topic":"概率论"},
         {"id":"statistic","topic":"统计学"}
         {"id":"PGM","topic":"概率图模型","children":[
@@ -170,7 +172,7 @@
         {"id":"java","topic":"Java"},
         {"id":"scala","topic":"Scala"}
     ]},
-    {"id":"dig","topic":"数据分析挖掘","direction":"left","expanded":false,"children":[
+    {"id":"dig","topic":"数据分析挖掘工具","direction":"left","expanded":false,"children":[
         {"id":"matlab","topic":"MATLAB"},
         {"id":"spss","topic":"SPSS"},
         {"id":"sas","topic":"SAS"}
